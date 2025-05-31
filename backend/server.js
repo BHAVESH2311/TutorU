@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser"); // Import cookie-parser
+const authRoutes = require("./routes/auth");
 require("dotenv").config();
 
 const app = express();
@@ -9,9 +11,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Middleware
+app.use(express.json()); // Body parser for JSON
+app.use(cookieParser()); // Use cookie-parser middleware
+
 // Routes
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/users", require("./routes/user"));
+app.use("/api/auth", authRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI, {
