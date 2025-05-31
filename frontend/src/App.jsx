@@ -6,11 +6,12 @@ import UserLanding from "./pages/UserLandingPage";
 import TeacherLanding from "./pages/TeacherLandingPage";
 import AdminLanding from "./pages/AdminLandingPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import LandingPage from "./pages/LandingPage";
 
 const App = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<Signup />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route

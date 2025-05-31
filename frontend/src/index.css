@@ -1,3 +1,8 @@
+@import "tailwindcss";
+a {
+  text-decoration: none !important;
+}
+
 .auth-form {
   display: flex;
   flex-direction: column;
