@@ -44,7 +44,7 @@ const LandingPage = () => {
 };
 
 // Navbar Component
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <nav className="bg-white py-4 sticky top-0 shadow-sm z-50">
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -510,7 +510,7 @@ const CallToActionSection = () => {
 };
 
 // Footer Component
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-8">

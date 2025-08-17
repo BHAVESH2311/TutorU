@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // assuming a parent component will handle rendering.
 import { Mail, Lock, LogIn } from "lucide-react";
 import axios from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState(""); // 'success' or 'error'
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Handle changes for form fields
   const handleChange = (e) => {
@@ -44,11 +46,26 @@ const Login = () => {
       return;
     }
 
+    // {
+    //     "message": "Logged in successfully",
+    //     "user": {
+    //         "id": "68a1a34320caccdf19aeff9a",
+    //         "email": "shubhampandeyhaihum@gmail.com",
+    //         "role": "student",
+    //         "profileId": "68a1a34320caccdf19aeff9c"
+    //     },
+    //     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTFhMzQzMjBjYWNjZGYxOWFlZmY5YSIsInJvbGUiOiJzdHVkZW50IiwicHJvZmlsZUlkIjoiNjhhMWEzNDMyMGNhY2NkZjE5YWVmZjljIiwiaWF0IjoxNzU1NDI0MDY1LCJleHAiOjE3NTU0MjQ5NjV9.dTIfiiDbTKFCRLaaFxxZURhlNeZb5yG5NglS_p0K6DY",
+    //     "expiresIn": "15m"
+    // }
+
     try {
       const res = await axios.post("/auth/login", formData);
+      console.log("Login response:", res);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.accessToken);
       showMessage(res.data.message || "Login successful!", "success");
       // Optionally navigate to dashboard or home page after successful login
-      // navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
       console.error("Login error:", err);
       const errorMessage =
@@ -58,6 +75,8 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  console.log(messageType);
 
   return (
     // Reintroduced gradient background for desktop, white for mobile, full page width, and allowed scrolling

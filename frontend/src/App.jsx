@@ -2,11 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/LoginPage";
 import Signup from "./pages/SignupPage";
-import UserLanding from "./pages/UserLandingPage";
-import TeacherLanding from "./pages/TeacherLandingPage";
-import AdminLanding from "./pages/AdminLandingPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import LandingPage from "./pages/LandingPage";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => (
   <Router>
@@ -15,26 +13,10 @@ const App = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route
-        path="/user"
+        path="/dashboard"
         element={
-          <ProtectedRoute roles={["user"]}>
-            <UserLanding />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/teacher"
-        element={
-          <ProtectedRoute roles={["teacher"]}>
-            <TeacherLanding />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute roles={["admin"]}>
-            <AdminLanding />
+          <ProtectedRoute roles={["student", "parent", "admin", "teacher"]}>
+            <Dashboard />
           </ProtectedRoute>
         }
       />

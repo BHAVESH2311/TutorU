@@ -1,7 +1,13 @@
 import axios from "axios";
 
+// Use import.meta.env for Vite, or process.env for CRA/Next.js
+const baseURL =
+  (import.meta.env && import.meta.env.VITE_BACKEND_URL
+    ? import.meta.env.VITE_BACKEND_URL
+    : "http://localhost:5000") + "/api";
+
 const instance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL,
 });
 
 instance.interceptors.request.use((config) => {
